@@ -16,7 +16,25 @@ app.set('view engine','html')
 app.use('/',(req,res)=>{
     res.render('index.html')
 })
+
+//Armazenamento das messages em array
+let messages = []
+
 //Toda vez que um cliente se conectar ao socket será
-io.on('connection')
+io.on('connection', socket =>{
+    console.log('Socket conectado:'+socket.id)
+
+    //Enviar mensagens anteriores para o novo usuário
+    //socket.emit('previousMessages',messages)
+    //Usar socket.on para que o back-end possa ouvir a mensagem digitada no front
+    socket.on('sendMessage', data =>{
+        messages.push(data)
+        //Usar socket.broadcast para que a mensagem seja exibida para todos
+        socket.broadcast.emit('receivedMessage',data )
+        
+
+    })
+});
+
 server.listen(3000)
 
