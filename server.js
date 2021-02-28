@@ -19,3 +19,4 @@ app.use('/',(req,res)=>{
 //Toda vez que um cliente se conectar ao socket será
 io.on('connection')
 server.listen(3000)
+
