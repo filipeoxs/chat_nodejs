@@ -23,10 +23,11 @@
     <script type='text/javascript'>
     var socket = io('http://localhost:3000')
 
+    //Função que envia de volta para o Front-End as mensagens que são digitadas pelo usuário
     function renderMessage(message){
         $('.messages').append('<div class="message"><strong>'+ message.author+'</strong>:'+ message.message +'</div>')
     }
-    
+
     //Descomentar para ativar o envio de mensagens antigas para o novo usuário
     //socket.on('previousMessages', function(messages){
         //for (message of messages){
@@ -34,6 +35,7 @@
         //}
     //})
 
+    //Envia as mensagens para a DIV
     socket.on('receivedMessage', function(message){
         renderMessage(message)
     })
@@ -49,9 +51,8 @@
                 author: author,
                 message:message,
             }
-
+            //Mensagens sendo enviadas para a div
             renderMessage(messageObject)
-
             socket.emit('sendMessage',messageObject)
         }
     })

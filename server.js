@@ -31,7 +31,6 @@ io.on('connection', socket =>{
         messages.push(data)
         //Usar socket.broadcast para que a mensagem seja exibida para todos
         socket.broadcast.emit('receivedMessage',data )
-        
 
     })
 });
